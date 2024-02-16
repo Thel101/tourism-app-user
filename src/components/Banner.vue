@@ -1,5 +1,5 @@
 <template>
-    <v-img :src="src" max-height="300px" class="mt-5">
+    <v-img :src="src" max-height="300px" class="mt-5 fill-height fill-width">
         <v-row align="end" class="fill-height">
             <v-col cols="12">
                 <v-container class="text--center">

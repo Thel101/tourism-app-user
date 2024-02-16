@@ -24,7 +24,7 @@ export default {
           links: [
               { text: 'Home', route: '/' },
               { text: 'Destinations', route: '/destinations' },
-              { text: 'Plan your trips', route: '/plan-trips' },
+              { text: 'Plan your trips', route: '/plans' },
               { text: 'About', route: '/about' },
               { text: 'Contact Us', route: '/contact' },
           ]
