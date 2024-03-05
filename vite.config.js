@@ -13,6 +13,9 @@ export default defineConfig({
       autoImport: true,
     }),
   ],
+  server:{
+    port : 5174,
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {

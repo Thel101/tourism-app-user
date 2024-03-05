@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <Banner :src="'/assets/images/cambodia3.jpeg'"></Banner>
-    <h3 class="my-5 headline text-center text-decoration-underline text--darken-2 grey--text">About Us</h3>
+    <h1 class="my-5 headline text-center text-decoration-underline text--darken-2 grey--text">About Us</h1>
     <p class="headline text-center">Welcome to <span class="green--text">Asiavista Expeditions</span>, your gateway to the
       heart of Southeast Asia!
     </p>
@@ -25,14 +25,19 @@
     <!-- Our Vision -->
 
     <!-- Why Choose Us section -->
-    <h4 class="my-10 headline text-center text-decoration-underline text--darken-2 grey--text">Why Choose Us</h4>
+    <v-container fluid>
+
+      <h3 class="my-10 headline text-center text-decoration-underline text--darken-2 grey--text">Why Choose Us</h3>
     <v-row>
       <v-col class="col-md-4 col-sm-12">
         <v-card class="mx-auto" max-width="400" flat>
-          <v-icon x-large color="green darken-2" class="d-flex flex-column mt-5" align-center>
+          <div class="d-flex flex-column mt-5 align-center justify-center">
+            <v-icon x-large color="green darken-2">
             mdi-account-group-outline
           </v-icon>
-          <v-card-title class="d-flex flex-column" align-center>Expertise</v-card-title>
+          </div>
+         
+          <v-card-title class="text-center" align-center>Expertise</v-card-title>
 
           <v-card-text class="text--primary text-center">
 
@@ -45,10 +50,13 @@
       </v-col>
       <v-col class="col-md-4 col-sm-12">
         <v-card class="mx-auto" max-width="400" flat>
-          <v-icon x-large color="green darken-2" class="d-flex flex-column mt-5" align-center>
+          <div class="d-flex flex-column mt-5 justify-center align-center">
+            <v-icon x-large color="green darken-2">
             mdi-cog-outline
           </v-icon>
-          <v-card-title class="d-flex flex-column" align-center>Customization</v-card-title>
+          </div>
+         
+          <v-card-title class="text-center" align-center>Customization</v-card-title>
 
           <v-card-text class="text--primary text-center">
 
@@ -62,10 +70,13 @@
       </v-col>
       <v-col class="col-md-4 col-sm-12">
         <v-card class="mx-auto" max-width="400" flat>
-          <v-icon x-large color="green darken-2" class="d-flex flex-column mt-5" align-center>
-            mdi-account-multiple
+          <div class="d-flex flex-column mt-5 justify-center align-center">
+            <v-icon x-large color="green darken-2">
+              mdi-account-multiple
           </v-icon>
-          <v-card-title class="d-flex flex-column" align-center>Small Group Focus</v-card-title>
+          </div>
+        
+          <v-card-title class="text-center" align-center>Small Group Focus</v-card-title>
 
           <v-card-text class="text--primary text-center">
 
@@ -77,12 +88,15 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col class="col-md-4 offset-md-4 col-sm-12">
-        <v-card class="mx-auto" max-width="400" flat>
-          <v-icon x-large color="green darken-2" class="d-flex flex-column mt-5" align-center>
-            mdi-check-circle-outline
+      <v-col class="col-md-4 col-sm-12">
+        <v-card class="d-flex flex-column justify-center mx-auto " max-width="400" flat>
+          <div class="d-flex flex-column mt-5 justify-center align-center">
+            <v-icon x-large color="green darken-2">
+              mdi-check-circle-outline
           </v-icon>
-          <v-card-title class="d-flex flex-column" align-center>Authentic Connections</v-card-title>
+          </div>
+         
+          <v-card-title class="text-center" align-center>Authentic Connections</v-card-title>
 
           <v-card-text class="text--primary text-center">
 
@@ -95,6 +109,7 @@
         </v-card>
       </v-col>
     </v-row>
+    </v-container>
 
     <!-- Why Choose Us section -->
     <!-- Last section -->
@@ -152,11 +167,11 @@ export default {
   methods: {
     getImageUrl(filename) {
       axios.get(`http://tourism-app-backend.test/api/contents/image/${filename}`,
-      {responseType : 'blob'})
+        { responseType: 'blob' })
         .then(response => {
-         const url = URL.createObjectURL(response.data);
-         this.imageUrl = url;
-         console.log(this.imageUrl)
+          const url = URL.createObjectURL(response.data);
+          this.imageUrl = url;
+          console.log(this.imageUrl)
         })
         .catch(error => {
           console.log(error)
