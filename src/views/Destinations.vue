@@ -68,13 +68,13 @@ export default {
     },
   
     getDestination() {
-      axios.get('http://tourism-app-backend.test/api/destinations/all')
+      axios.get('/api/destinations/all')
         .then(response => {
           let results = response.data;
           let allResults = results.map(item => {
             return {
               ...item,
-              country_image: `http://tourism-app-backend.test/api/destinations/image/${item.country_image}`
+              country_image: `/api/destinations/image/${item.country_image}`
             }
           })
           this.destinations = allResults;

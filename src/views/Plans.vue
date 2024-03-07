@@ -28,17 +28,17 @@
               <br>
               <v-sheet border>
                 <v-row class="py-5">
-                  <v-col lg="4" md="12" sm="12">
+                  <v-col class="col-md-12 col-lg-4 col-sm-12 mx-2">
                     <v-text-field v-model="name" label="Name" class="required-field" required></v-text-field>
                     <span v-if="errors && errors.name" class="text-red">{{ errors.name[0] }}</span>
                   </v-col>
 
-                  <v-col class="col-md-12 col-lg-4 col-sm-12">
+                  <v-col class="col-md-12 col-lg-4 col-sm-12 mx-2">
                     <v-text-field v-model="email" label="E-mail" required></v-text-field>
                     <span v-if="errors && errors.email" class="text-red">{{ errors.email[0] }}</span>
                   </v-col>
                   
-                  <v-col class="col-md-12 col-lg-4 col-sm-12">
+                  <v-col class="col-md-12 col-lg-4 col-sm-12 mx-2">
                     <v-text-field v-model="phone" label="Phone Number" required></v-text-field>
                     <span v-if="errors && errors.phone_no" class="text-red">{{ errors.phone_no[0] }}</span>
                   </v-col>
@@ -58,16 +58,16 @@
             <br>
             <v-form @submit.prevent="submitForm">
               <v-row>
-                <v-col md="12" lg="4">
+                <v-col class="col-md-12 col-lg-4 col-sm-12">
                   <v-text-field v-model="destination" label="Destination" required></v-text-field>
                   <span v-if="errors && errors.destination" class="text-red">{{ errors.destination[0] }}</span>
                 </v-col>
-                <v-col md="12" lg="4">
+                <v-col class="col-md-12 col-lg-4 col-sm-12">
                   <v-text-field type="date" v-model="travel_date" :min="current_date"
                     label="Preferred travel date"></v-text-field>
                   <span v-if="errors && errors.travel_date" class="text-red">{{ errors.travel_date[0] }}</span>
                 </v-col>
-                <v-col md="12" lg="4">
+                <v-col class="col-md-12 col-lg-4 col-sm-12">
                   <v-text-field type="number" v-model="traveller_count" label="Number of Travellers"
                     required></v-text-field>
                 </v-col>
@@ -193,7 +193,7 @@ export default {
     const message = ref('');
     const submitForm = () => {
       if (step.value === 3) {
-        axios.post('http://tourism-app-backend.test/api/plans/create', {
+        axios.post('/api/plans/create', {
           "name": name.value,
           "email": email.value,
           "phone_no": phone.value,
@@ -220,7 +220,8 @@ export default {
             "comfort": comfort_pref.value
           },
           "additional_comments": comment.value,
-          "subscribe": true
+          "subscribe": true,
+          "status" : 'new'
         })
 
           .then(function (response) {
@@ -245,6 +246,7 @@ export default {
       clearValues;
     }
     const clearValues = () => {
+      show_toast.value = false;
       name.value = '';
       phone.value = '';
       email.value = '';
@@ -279,6 +281,14 @@ export default {
 </script>
 
 <style>
+
+@media (max-width: 600px) {
+    .col-sm-12 {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
 .smaller-date-picker .v-picker__body {
   max-height: 300px;
   /* Set maximum height for the date picker body */

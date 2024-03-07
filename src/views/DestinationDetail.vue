@@ -54,12 +54,12 @@ export default {
     const body = ref('');
     const image = ref([]);
     const getDestination = (id) => {
-      axios.get(`http://tourism-app-backend.test/api/destination/${id}`)
+      axios.get(`/api/destination/${id}`)
         .then(response => {
           country.value = response.data.country;
           description.value = response.data.description;
           body.value = response.data.body;
-          image.value = `http://tourism-app-backend.test/api/destinations/image/${response.data.country_image}`;
+          image.value = `/api/destinations/image/${response.data.country_image}`;
         })
         .catch(error => console.log(error))
     }

@@ -81,12 +81,13 @@ export default {
         const showDialog = ref(false);
         const message = ref('');
         const sendContact = () => {
-            axios.post('http://tourism-app-backend.test/api/contact/create', {
+            axios.post('/api/contact/create', {
                 'name': name.value,
                 'email': email.value,
                 'phone': phone.value,
                 'reason': reason.value,
-                'comments': comment.value
+                'comments': comment.value,
+                'status' : 'new'
             })
                 .then(function (response) {
                     if (response.status === 200) {
@@ -96,6 +97,7 @@ export default {
                         reason.value = '';
                         comment.value = '';
                         showDialog.value = true;
+                        errors.value = true;
                         message.value = response.data.message
                         console.log(message.value)
                     }

@@ -1,16 +1,17 @@
 import { createApp, markRaw } from 'vue'
-import { createPinia} from 'pinia';
+import { createPinia } from 'pinia';
 import './axios'
 import App from './App.vue'
 import router from './router'
-import vuetify from './plugins/vuetify'
+import { createVuetify } from 'vuetify'
 import { loadFonts } from './plugins/webfontloader'
 
 const pinia = createPinia();
-pinia.use (({store})=>{
+pinia.use(({ store }) => {
   store.router = markRaw(router)
 }
-  )
+)
+const vuetify = createVuetify()
 loadFonts()
 
 createApp(App)

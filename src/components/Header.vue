@@ -1,12 +1,9 @@
 <template>
-
-  <nav>
-    <v-app-bar theme="dark" app flat>
-
+  <div>
+    <!-- Large screen layout -->
+    <v-app-bar app dark color="primary" v-if="$vuetify.breakpoint.mdAndUp">
       <v-toolbar-title>Asiavista Expeditions</v-toolbar-title>
-
       <v-spacer></v-spacer>
-
       <v-hover open-delay="100" v-for="link in links" :key="link.text">
         <router-link :to="link.route" class="white--text links">
           <v-btn text :class="{ 'on-hover': hover }" rounded>
@@ -19,44 +16,47 @@
           <router-link to="/register">
             <v-btn rounded="xl" variant="outlined" color="blue-lighten-2">Register</v-btn>
           </router-link>
-
-
           <router-link to="/login">
-            <v-btn prepend-icon="mdi-account" class="ml-2" rounded="xl" variant="outlined"
-              color="green-lighten-2">Login</v-btn>
+            <v-btn prepend-icon="mdi-account" class="ml-2" rounded="xl" variant="outlined" color="green-lighten-2">Login</v-btn>
           </router-link>
         </div>
       </template>
-
       <template v-else>
         <div class="d-flex">
           <v-avatar color="green-lighten-1">
             {{ getUserInitials }}
           </v-avatar>
-
-          <v-btn @click="authStore.handleLogout" prepend-icon="mdi-account" class="ml-2" rounded="xl" variant="outlined"
-            color="green-lighten-2">LogOut</v-btn>
+          <v-btn @click="authStore.handleLogout" prepend-icon="mdi-account" class="ml-2" rounded="xl" variant="outlined" color="green-lighten-2">LogOut</v-btn>
         </div>
-
-
       </template>
-      <!-- <div class="d-flex">
-        <router-link to="/login">
-        <v-btn prepend-icon="mdi-account" class="ml-2" rounded="xl" variant="outlined"
-          color="green-lighten-2">LogOut</v-btn>
-      </router-link>
-      </div> -->
-
-
-
-
     </v-app-bar>
-  </nav>
+
+    <!-- Small screen layout -->
+    <v-app-bar app dark color="primary" v-else hide-on-scroll>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Asiavista Expeditions</v-toolbar-title>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" app>
+      <v-list>
+        <v-list-item v-for="link in links" :key="link.text" link :to="link.route">
+          <v-list-item-title>{{ link.text }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+      <template v-if="!authStore.user">
+        <v-btn @click="goTo('/register')" block>Register</v-btn>
+        <v-btn @click="goTo('/login')" block>Login</v-btn>
+      </template>
+      <template v-else>
+        <v-btn @click="authStore.handleLogout" block>Logout</v-btn>
+      </template>
+    </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
 import { ref } from 'vue';
-import { useRouter} from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 
 export default {
@@ -69,26 +69,27 @@ export default {
       { text: 'About', route: '/about' },
     ]);
     const authStore = useAuthStore();
-    const router = useRouter();
-    const authenticatePlansRoute = (to, from, next) => {
+    const drawer = ref(false);
+    // const router = useRouter();
+    // const authenticatePlansRoute = (to, from, next) => {
 
-      if (!authStore.user) {
-        next({ path: '/login', query: { redirectMessage: 'Please login to access this page.' } });
-      } else {
-        next();
-      }
-    };
+    //   if (!authStore.user) {
+    //     next({ path: '/login', query: { redirectMessage: 'Please login to access this page.' } });
+    //   } else {
+    //     next();
+    //   }
+    // };
 
-    router.beforeEach((to, from, next) => {
-      if (to.path === '/plans') {
-        authenticatePlansRoute(to, from, next);
-      } else {
+    // router.beforeEach((to, from, next) => {
+    //   if (to.path === '/plans') {
+    //     authenticatePlansRoute(to, from, next);
+    //   } else {
 
-        next();
-      }
-    });
+    //     next();
+    //   }
+    // });
 
-    return { links, router, hover, authStore }
+    return { links, hover, authStore, drawer }
   },
   computed: {
     getUserInitials() {

@@ -156,7 +156,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://tourism-app-backend.test/api/contents/About', { params: { page: "About" } })
+    axios.get('/api/contents/About', { params: { page: "About" } })
       .then(response => {
         this.content = response.data;
         console.log(this.content)
@@ -166,7 +166,7 @@ export default {
   },
   methods: {
     getImageUrl(filename) {
-      axios.get(`http://tourism-app-backend.test/api/contents/image/${filename}`,
+      axios.get(`/api/contents/image/${filename}`,
         { responseType: 'blob' })
         .then(response => {
           const url = URL.createObjectURL(response.data);
