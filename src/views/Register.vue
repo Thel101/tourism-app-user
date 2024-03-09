@@ -65,8 +65,10 @@ export default {
         const form = ref({
             name : "",
             email : "",
+            role : "user",
             password : "",
-            confirm_password: ""
+            confirm_password: "",
+
         })
        
         const show1 = ref(false);

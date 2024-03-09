@@ -46,6 +46,7 @@ export const useAuthStore = defineStore("auth",{
                     'name': data.name,
                     'email': data.email,
                     'password': data.password,
+                    'role' : 'user',
                     'password_confirmation': data.confirm_password
                 })
             this.router.push('/');
